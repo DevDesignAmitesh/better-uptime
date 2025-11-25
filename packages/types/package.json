@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "types",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,18 +8,17 @@
     "build": "tsc -b",
     "dev": "pnpm run build && pnpm run start"
   },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
+  },
+  "exports":{
+    "./types": "./dist/index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "devDependencies": {
-    "db": "workspace:*",
-    "types": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
-  },
   "dependencies": {
-    "@types/express": "^5.0.5",
-    "express": "^5.1.0",
-    "ts-node": "^10.9.2"
+    "zod": "^4.1.13"
   }
 }
