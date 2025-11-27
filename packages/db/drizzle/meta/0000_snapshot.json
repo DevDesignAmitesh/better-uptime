@@ -1,5 +1,5 @@
 {
-  "id": "54abfcd3-72a6-4ddb-ab2d-4f447f6e85a4",
+  "id": "ee38d8dc-26e2-4d77-a5d9-051d0182f935",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -78,13 +78,13 @@
           "name": "regionId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "websiteId": {
           "name": "websiteId",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "timeAdded": {
           "name": "timeAdded",
@@ -95,7 +95,34 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "ticks_regionId_region_id_fk": {
+          "name": "ticks_regionId_region_id_fk",
+          "tableFrom": "ticks",
+          "tableTo": "region",
+          "columnsFrom": [
+            "regionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "ticks_websiteId_websites_id_fk": {
+          "name": "ticks_websiteId_websites_id_fk",
+          "tableFrom": "ticks",
+          "tableTo": "websites",
+          "columnsFrom": [
+            "websiteId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -143,7 +170,23 @@
           "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "emailUnique": {
+          "name": "emailUnique",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
@@ -178,6 +221,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "userId": {
+          "name": "userId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "timeAdded": {
           "name": "timeAdded",
           "type": "timestamp with time zone",
@@ -187,7 +236,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "websites_userId_users_id_fk": {
+          "name": "websites_userId_users_id_fk",
+          "tableFrom": "websites",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
