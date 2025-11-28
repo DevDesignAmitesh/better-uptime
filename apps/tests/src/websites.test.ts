@@ -1,8 +1,6 @@
 import { describe, it, expect } from "vitest";
 import axios from "axios";
-import { BASE_URL } from "./utils"
-
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNCIsImlhdCI6MTc2NDIzMzU2NH0.3rKW07Gc-hEuBau2tPHymqRxZT1Q7fVJx1CP_HyRVzE";
+import { BASE_URL, createWebite, token } from "./utils"
 
 describe("post request for adding a website", () => {
   it("this should succeeded", async () => {
@@ -64,7 +62,8 @@ describe("post request for adding a website", () => {
 
 describe("get request for a website", () => {
   it("this should succeeded", async () => {
-    await expect(axios.get(`${BASE_URL}/status/1`, {
+    const websiteId = await createWebite();
+    await expect(axios.get(`${BASE_URL}/status/${websiteId}`, {
       headers: {
         Authorization: token
       }
@@ -73,7 +72,7 @@ describe("get request for a website", () => {
   });
 
   it("this should fail as of no auth header", async () => {
-    await expect(axios.get(`${BASE_URL}/status/1`, {
+    await expect(axios.get(`${BASE_URL}/status/hello`, {
     })).rejects.toMatchObject({
       response: {
         status: 401
@@ -82,7 +81,7 @@ describe("get request for a website", () => {
   });
 
   it("this should fail as of website not found", async () => {
-    await expect(axios.get(`${BASE_URL}/status/100000`, {
+    await expect(axios.get(`${BASE_URL}/status/f151774b-463c-4df6-95fb-b2eb11a00291`, {
       headers: {
         Authorization: token
       }

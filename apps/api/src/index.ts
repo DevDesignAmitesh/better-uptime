@@ -1,3 +1,4 @@
+import "dotenv/config"
 import express from "express";
 import { db, schema, asc, eq, and } from "db/db";
 import { insertWebsite, getWebsite } from "types/types";
@@ -35,12 +36,8 @@ app.get("/status/:id", middleware, async (req, res) => {
   const userId = req.user?.userId!
   const websiteId = req.params.id;
 
-  if (isNaN(Number(websiteId))) {
-    return res.status(411).json({ message: "invalid inputs" });
-  }
-
   const { data, success, error } = getWebsite.safeParse({
-    id: Number(websiteId),
+    id: websiteId,
   });
 
   if (!success) {
@@ -50,16 +47,19 @@ app.get("/status/:id", middleware, async (req, res) => {
 
   const { id } = data;
 
-  const website = await db
-    .select()
-    .from(schema.websites)
-    .where(and(eq(schema.websites.id, id), eq(schema.websites.userId, userId)))
-    .orderBy(asc(schema.websites.createdAt))
-    .limit(1);
+  const website = await db.query.websites.findFirst({
+    where: (and(eq(schema.websites.id, id), eq(schema.websites.userId, userId))),
+    with: {
+      ticks: {
+        limit: 1,
+        orderBy: asc(schema.ticks.createdAt)
+      }
+    },
+  });
 
   console.log("this is the website", website)
 
-  if (website.length === 0) {
+  if (!website) {
     return res.status(404).json({ message: "not found" });
   }
 
@@ -132,3 +132,7 @@ app.listen(3000, () => console.log("code is running on 3000"));
 
 //   console.log(website);
 // })();
+
+// // for geenrayting token
+// const token = generateToken({userId: "70660822-c957-44b4-9ee7-7d2d8f41eab7"})
+// console.log(token)

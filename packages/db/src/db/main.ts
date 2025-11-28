@@ -38,7 +38,7 @@ export const websites = pgTable("websites", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 
-  createdAt: timestamp("timeAdded", {
+  createdAt: timestamp("createdAt", {
     mode: "date",
     withTimezone: true,
   }).defaultNow(),

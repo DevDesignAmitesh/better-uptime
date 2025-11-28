@@ -1,5 +1,5 @@
 {
-  "id": "496a5a01-eb79-4f0d-b481-f53563d555d1",
+  "id": "f83aea54-0fdd-4d8f-8c56-7d31f1f97c72",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -187,8 +187,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "timeAdded": {
-          "name": "timeAdded",
+        "createdAt": {
+          "name": "createdAt",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,

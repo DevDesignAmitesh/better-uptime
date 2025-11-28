@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { db } from "db/db";
 import { redisClient } from "redis-client/redis-client";
 
@@ -10,7 +11,9 @@ async function main () {
       }
     });
 
-    await redisClient.xAddBuilk(websites)
+    console.log(websites.length)
+
+    redisClient.xAddBuilk(websites)
 
   } catch (e) {
     console.log("error in the pusher", e);
@@ -19,4 +22,5 @@ async function main () {
 
 main()
 
-setInterval(main, 3 * 60 * 1000)
+// setInterval(main, 3 * 60 * 1000)
+setInterval(main, 20 * 1000)

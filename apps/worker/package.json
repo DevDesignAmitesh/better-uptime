@@ -1,5 +1,5 @@
 {
-  "name": "pusher",
+  "name": "worker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,6 +16,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "axios": "^1.13.2",
     "dotenv": "^17.2.3"
   }
 }

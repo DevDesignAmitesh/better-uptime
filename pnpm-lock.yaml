@@ -26,6 +26,9 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
       express:
         specifier: ^5.1.0
         version: 5.1.0
@@ -50,6 +53,10 @@ importers:
         version: link:../../packages/types
 
   apps/pusher:
+    dependencies:
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
@@ -110,6 +117,25 @@ importers:
       typescript:
         specifier: 5.9.2
         version: 5.9.2
+
+  apps/worker:
+    dependencies:
+      axios:
+        specifier: ^1.13.2
+        version: 1.13.2
+      dotenv:
+        specifier: ^17.2.3
+        version: 17.2.3
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      db:
+        specifier: workspace:*
+        version: link:../../packages/db
+      redis-client:
+        specifier: workspace:*
+        version: link:../../packages/redis-client
 
   packages/db:
     dependencies:

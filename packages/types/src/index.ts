@@ -5,5 +5,5 @@ export const insertWebsite = z.object({
 });
 
 export const getWebsite = z.object({
-  id: z.number(),
+  id: z.string(),
 });
