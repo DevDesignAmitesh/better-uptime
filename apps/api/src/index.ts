@@ -1,18 +1,3 @@
-/**
- *
- * watching the vidoe below
- * https://app.100xdevs.com/courses/15/751/754
- * at one hour
- *
- *
- * have to complete all the test and crud of the user and websites
- *
- *
- * now on this
- * https://app.100xdevs.com/courses/15/752/755
- *
- */
-
 import express from "express";
 import { db, schema, asc, eq, and } from "db/db";
 import { insertWebsite, getWebsite } from "types/types";

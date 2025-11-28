@@ -18,6 +18,20 @@ describe("post request for adding a website", () => {
     )).resolves.toHaveProperty("status", 201)
   });
 
+  // added tests for adding bad websites too.
+  it("this should succeeded", async () => {
+    await expect(axios.post(`${BASE_URL}/website`, 
+      {
+        url: "https://naukriscore.com",
+      }, 
+      {
+        headers: {
+          Authorization: token
+        }
+      }
+    )).resolves.toHaveProperty("status", 201)
+  });
+
   it("this should fail as of no auth header", 
     async () => {
     await expect(axios.post(`${BASE_URL}/website`, {

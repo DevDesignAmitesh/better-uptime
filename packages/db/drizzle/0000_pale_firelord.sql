@@ -1,29 +1,29 @@
 CREATE TYPE "public"."websiteStatus" AS ENUM('Up', 'Down', 'Unkown');--> statement-breakpoint
 CREATE TABLE "region" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "region_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "ticks" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "ticks_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"response_time" integer NOT NULL,
 	"status" "websiteStatus",
-	"regionId" integer NOT NULL,
-	"websiteId" integer NOT NULL,
+	"regionId" uuid NOT NULL,
+	"websiteId" uuid NOT NULL,
 	"timeAdded" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "users_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"email" text NOT NULL,
 	"password" text NOT NULL,
 	"timeAdded" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE "websites" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "websites_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"url" text NOT NULL,
-	"userId" integer NOT NULL,
+	"userId" uuid NOT NULL,
 	"timeAdded" timestamp with time zone DEFAULT now()
 );
 --> statement-breakpoint

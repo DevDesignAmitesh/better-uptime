@@ -5,6 +5,7 @@ import {
   timestamp,
   pgEnum,
   uniqueIndex,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -13,7 +14,7 @@ export const websiteStatus = pgEnum("websiteStatus", ["Up", "Down", "Unkown"]);
 export const users = pgTable(
   "users",
   {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    id: uuid().defaultRandom().primaryKey(),
     email: text("email").notNull(),
     password: text("password").notNull(),
 
@@ -30,10 +31,10 @@ export const usersRelations = relations(users, ({ many }) => ({
 }));
 
 export const websites = pgTable("websites", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: uuid().defaultRandom().primaryKey(),
   url: text("url").notNull(),
 
-  userId: integer()
+  userId: uuid()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
 
@@ -52,7 +53,7 @@ export const websitesRealtion = relations(websites, ({ many, one }) => ({
 }));
 
 export const region = pgTable("region", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: uuid().defaultRandom().primaryKey(),
   name: text("name").notNull(),
 });
 
@@ -61,13 +62,13 @@ export const regionRealtion = relations(region, ({ many }) => ({
 }));
 
 export const ticks = pgTable("ticks", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: uuid().defaultRandom().primaryKey(),
   response_time: integer("response_time").notNull(),
   status: websiteStatus(),
-  regionId: integer()
+  regionId: uuid()
     .notNull()
     .references(() => region.id, { onDelete: "cascade" }),
-  websiteId: integer()
+  websiteId: uuid()
     .notNull()
     .references(() => websites.id, { onDelete: "cascade" }),
 
